@@ -6,6 +6,7 @@ import { Logger } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableVersioning();
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Outfit generator API')
