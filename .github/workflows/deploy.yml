@@ -3,13 +3,12 @@ name: deploy-backend
 on:
   push:
     tags: ['backend-v*.*.*']
-    branches: [main]
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: kultureinrichtungen/backend_service
+  IMAGE_NAME: outfits/backend_service
 
 jobs:
   main:
@@ -30,10 +29,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-      - run: pnpm install
-      - run: ls 
-      - run: nest build
-      - run: pnpm build
+
+      - name: Install dependencies
+        run: pnpm install
+  
+      - name: Build project
+        run: pnpm run build
 
       # Workaround: https://github.com/docker/build-push-action/issues/461
       - name: Setup Docker buildx
@@ -54,7 +55,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@8e5442c4ef9f78752691e2d8f8d19755c6f78e81
         with:
-          images: feelgood1987/kultur
+          images: feelgood1987/outfits-backend
           tags: ${{ steps.meta.outputs.tags }}
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action

@@ -6,9 +6,10 @@ USER node
 
 ENV SERVICE_NAME backend
 
-COPY --chown=node:node ./dist ./
+COPY --chown=node:node ./dist ./dist
+COPY package*.json ./
+COPY tsconfig.json ./
 
-RUN ls ./
 RUN pnpm install 
 
-CMD [ "node", "main.js" ]
+CMD [ "node", "dist/main.js" ]
