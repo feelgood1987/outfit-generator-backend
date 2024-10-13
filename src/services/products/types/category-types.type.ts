@@ -45,7 +45,8 @@ export const CategoryTypes = {
     oberbekleidung: {
       blusen: ['WCA00122', 'WCA00121'],
       tops: ['WCA00111', 'WCA00112', 'WCA00110'],
-      sweatshirts: ['WCA00132', 'WCA00131'],
+      // I removed the `WCA00132` from the array because it was a male product, but in the pdf, declared as a women sweatshirt
+      sweatshirts: ['WCA00131'],
     },
     unterbekleidung: {
       hosen: ['WCA00172', 'WCA00173', 'WCA00171'],
